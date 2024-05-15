@@ -9,23 +9,22 @@
     <title>Weather</title>
 
     <style>
-        /* img{
+        img{
             width: 50px;
             height: 50px;
             background-color: aliceblue;
             border-radius: 100%;
-        } */
+        }
 
         .weather_div{
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
         .weather_text{
-         font-size: 2.2rem;
-         font-weight: 600;
+         font-size: 1.3rem;
+         font-weight: 700;
         }
     </style>
 </head>
@@ -36,13 +35,13 @@
         <div class="row mt-4 ">
           <div class="col-md-6 offset-md-3">
             <div class="card">
+                <h3 class="card-title text-center">Current Weather</h3>
               <div class="card-body weather_div">
-                <h3 class="card-title">Current Weather</h3>
-                 <div class="weather_text">
-                      <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="icon" id="condition">
-                    <span id="temperature"></span>°C 
+                <img src="" alt="icon" id="condition">
+                 <div class=" ms-2">
+                     <P class="card-text m-0 weather_text"> <span id="temperature"></span>°C </P>
+                     <p class="card-text fw-bold "><span id="status"></span></p>
                  </div>
-                <p class="card-text"><span id="status"></span></p>
               </div>
             </div>
           </div>
@@ -51,6 +50,7 @@
 
        
       <script>
+        // OpenWeather API  
         const apiKey = "5ae7b4537768369b0005e69e1b24b19d";
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?unite=metric";
         const city = 'Dhaka';
@@ -68,6 +68,7 @@
 
         }
         
+        //check the function
         checkWeather();
 
       </script>
