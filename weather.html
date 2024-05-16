@@ -12,8 +12,9 @@
         img{
             width: 50px;
             height: 50px;
-            background-color: aliceblue;
+            /* background-color: aliceblue; */
             border-radius: 100%;
+            object-fit: cover;
         }
 
         .weather_div{
@@ -93,6 +94,20 @@
            const weatherCode = data.current.weather_code;
            const weatherDescription = weatherDescriptions[weatherCode] || 'Unknown';
            document.getElementById('status').textContent = weatherDescription;
+          //  document.getElementById('condition').src = "./New folder/weather02-512.webp";
+       
+           const iconImage =  document.getElementById('condition');
+            
+           if(weatherCode == 0 ){
+               iconImage.src = "./New folder/sun.png";
+           } else if (weatherCode == 1) {
+               iconImage.src = "./New folder/sun.png";
+           } else if (weatherCode == 2) {
+               iconImage.src = "./New folder/cloudy(2).png";
+           } else if (weatherCode == 3) {
+               iconImage.src = "./New folder/overcast.png";
+           }
+          
 
         }
         checkWeather()
