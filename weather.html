@@ -39,9 +39,9 @@
     <div class="row mt-4 ">
       <div class="col-md-6 offset-md-3">
         <div class="card">
-          <h3 class="card-title text-center">Current Weather</h3>
+          <h3 class="card-title text-center">Kardamyli Greece Current Weather</h3>
           <div class="card-body weather_div">
-            <img src="" alt="icon" id="condition">
+            <img src="./images/weather.png" alt="icon" id="condition">
             <div class="ms-2">
               <p class="card-text m-0 weather_text"><span id="temperature"></span>°C</p>
               <p class="card-text"><span id="status">Cloudy</span></p>
@@ -51,10 +51,18 @@
       </div>
     </div>
   </div>
+<!-- 
+  <div class="weather_div">
+    <img src="" alt="icon" id="condition">
+    <div class="ms-2">
+      <p class=" m-0 weather_text"><span id="temperature"></span>°C</p>
+      <p id="status">Cloudy</p>
+    </div>
+  </div> -->
 
 
   <script>
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=36.8878&longitude=22.2332&current=temperature_2m,weather_code';
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=36.8878&longitude=22.2332&current=temperature_2m,apparent_temperature,is_day,rain,showers,snowfall,weather_code,cloud_cover&hourly=temperature_2m';
 
     /*
         0: 'Clear sky',
@@ -126,37 +134,58 @@
 
       document.getElementById('temperature').textContent = Math.round(data.current.temperature_2m);
       const weatherCode = data.current.weather_code;
+      // const weatherCode = 48;
       const weatherDescription = weatherDescriptions[weatherCode] || 'Unknown';
       document.getElementById('status').textContent = weatherDescription;
       const iconImage = document.getElementById('condition');
+      const dayNight = data.current.is_day ;
+      // const dayNight = 0;
+
+      // // const currentHour = new Date().getHours();
+      // const currentHour = data.current.time;
+      // console.log(currentHour)
+      // const isDayTime = currentHour >= 6 && currentHour < 18; // Daytime between 6 AM and 6 PM
+
+
 
 
       // Icon Showing
       if (weatherCode == 0 || weatherCode == 1) {
-        iconImage.src = "./image/sun.png";
+        // iconImage.src = isDayTime ? "./images/sun.png" : "./images/moon-and-stars.png";
+        if(dayNight == 0){
+          iconImage.src = "./images/moon-and-stars.png";
+        } else {
+          iconImage.src = "./images/sun.png";
+        }
       } else if (weatherCode == 2) {
-        iconImage.src = "./image/partly-cloudy.png";
-      } else if (weatherCode == 3 ) {
-        iconImage.src = "./image/overcast.png";
+        // iconImage.src = isDayTime ? "./images/partly-cloudy.png " : "./images/moon.png";
+        if(dayNight == 0){ 
+          iconImage.src = "./images/night.png";
+        } else {
+          iconImage.src = "./images/partly-cloudy.png";        
+        }
+      } else if (weatherCode == 3 ) {      
+        iconImage.src = "./images/overcast.png";
       } else if (weatherCode == 45 || weatherCode == 48) {
-        iconImage.src = "./image/fog.png";
+        iconImage.src = "./images/fog.png";
       } else if (weatherCode == 51 || weatherCode == 53 || weatherCode == 55) {
-        iconImage.src = "./image/drizzle.png";
+        iconImage.src = "./images/drizzle.png";
       }  else if (weatherCode == 56 || weatherCode == 57 ) {
-        iconImage.src = "./image/drizzle.png";
+        iconImage.src = "./images/drizzle.png";
       } else if (weatherCode == 61 || weatherCode == 63 || weatherCode == 65) {
-        iconImage.src = "./image/rain.png";
+        iconImage.src = "./images/rain.png";
       } else if (weatherCode == 66 || weatherCode == 67 ) {
-        iconImage.src = "./image/freezing-rain.png";
+        iconImage.src = "./images/freezing-rain.png";
       } else if (weatherCode == 71 || weatherCode == 73 || weatherCode == 75 || weatherCode == 77) {
-        iconImage.src = "./image/snowy.png";
+        iconImage.src = "./images/snowy.png";
       } else if (weatherCode == 80 || weatherCode == 81 || weatherCode == 82) {
-        iconImage.src = "./image/snowy.png";
+        iconImage.src = "./images/snowy.png";
       } else if (weatherCode == 95 || weatherCode == 96 || weatherCode == 99) {
-        iconImage.src = "./image/storm.png";
+        iconImage.src = "./images/storm.png";
       } 
     }
     checkWeather()
+    
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
